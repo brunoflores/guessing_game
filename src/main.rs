@@ -8,15 +8,22 @@ fn main() {
     let secret_number: u32 = rand::thread_rng().gen_range(1..101);
     println!("The secret number is: {}", secret_number);
 
-    println!("Please input a number");
-    let guess = ask();
-    println!("You guessed: {}", guess);
+    loop {
+        println!("Please input a number");
+        let guess = ask();
+        println!("You guessed: {}", guess);
 
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small"),
-        Ordering::Greater => println!("Too big"),
-        Ordering::Equal => println!("Nailed it"),
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small"),
+            Ordering::Greater => println!("Too big"),
+            Ordering::Equal => {
+                println!("Nailed it");
+                break;
+            }
+        }
     }
+
+    println!("Exiting now");
 }
 
 fn ask() -> u32 {
